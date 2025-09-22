@@ -9,7 +9,9 @@ import isAdmin from "../Middlewares/IsAdmin.js";
 const imageRouter = express.Router();
 
 
-imageRouter.route('/').get(isLogin, getOneImageByUserId).get(isAdmin, getAllImages);
+imageRouter.route('/').get(isLogin, getOneImageByUserId)
+
+imageRouter.route('/all').get(isAdmin, getAllImages);
 
 imageRouter.route('/:imageId').get(isLogin, getOneImageById)
 
