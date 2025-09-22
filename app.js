@@ -8,6 +8,7 @@ import authRouter from "./Routes/Auth.js";
 import userRouter from "./Routes/User.js";
 import exportValidation from "./Middlewares/ExportValidation.js";
 import imageRouter from "./Routes/Image.js";
+import uploadRouter from "./Routes/Upload.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,32 +22,14 @@ app.use(express.static("Public"));
 
 
 //Auth Routes
-app.use('/api/auth',authRouter)
+app.use('/api/auth', authRouter)
 app.use(exportValidation)
 
 
 //User Routes
 app.use('/api/users', userRouter)
 app.use('/api/images', imageRouter)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.use('/api/uploads', uploadRouter)
 
 
 app.use((req, res, next) => {

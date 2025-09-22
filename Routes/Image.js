@@ -1,20 +1,18 @@
 import express from 'express';
-import { getMyImages, getImageById, transformImage } from '../Controllers/ImageCn.js';
-import { uploadImage, removeImage } from '../Controllers/UploadCn.js';
+import {
+    getOneImageById,
+    getTransformedImage, getOneImageByUserId, getAllImages
+} from '../Controllers/ImageCn.js';
 import isLogin from '../Middlewares/IsLogin.js';
-import upload from '../Utils/Upload.js';
+import isAdmin from "../Middlewares/IsAdmin.js";
 
 const imageRouter = express.Router();
 
 
-imageRouter.route('/').get(isLogin, getMyImages);
+imageRouter.route('/').get(isLogin, getOneImageByUserId).get(isAdmin, getAllImages);
 
+imageRouter.route('/:imageId').get(isLogin, getOneImageById)
 
-
-
-
-imageRouter.route('/:imageId').get(isLogin, getImageById).delete(isLogin, removeImage);
-
-imageRouter.route('/:imageId/transform').post(isLogin, transformImage);
+imageRouter.route('/:imageId/transform').post(isLogin, getTransformedImage);
 
 export default imageRouter;
