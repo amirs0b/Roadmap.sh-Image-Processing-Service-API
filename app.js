@@ -10,6 +10,8 @@ import exportValidation from "./Middlewares/ExportValidation.js";
 import imageRouter from "./Routes/Image.js";
 import uploadRouter from "./Routes/Upload.js";
 import isLogin from "./Middlewares/IsLogin.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocs from "./Utils/Swagger.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -31,6 +33,7 @@ app.use(exportValidation)
 app.use('/api/users', userRouter)
 app.use('/api/images', imageRouter)
 app.use('/api/uploads',isLogin, uploadRouter)
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 app.use((req, res, next) => {

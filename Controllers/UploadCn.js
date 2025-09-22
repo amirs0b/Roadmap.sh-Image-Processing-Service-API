@@ -1,5 +1,4 @@
 import {catchAsync, HandleERROR} from "vanta-api";
-import fs from "fs";
 import Image from "../Models/ImageMd.js";
 
 export const uploadImage = catchAsync(async (req, res, next) => {
