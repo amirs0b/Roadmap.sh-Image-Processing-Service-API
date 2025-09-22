@@ -7,6 +7,7 @@ import morgan from "morgan";
 import authRouter from "./Routes/Auth.js";
 import userRouter from "./Routes/User.js";
 import exportValidation from "./Middlewares/ExportValidation.js";
+import imageRouter from "./Routes/Image.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,6 +27,7 @@ app.use(exportValidation)
 
 //User Routes
 app.use('/api/users', userRouter)
+app.use('/api/images', imageRouter)
 
 
 
