@@ -1,6 +1,6 @@
-Of course. Here is a comprehensive `README.md` file for your project, including a "Source" section as you requested.
+Of course. I have updated the `README.md` file to include the project source link you provided from roadmap.sh.
 
------
+Here is the updated `README.md` file:
 
 # Image Processing Service API
 
@@ -63,22 +63,23 @@ To get a local copy up and running, follow these simple steps.
 
 All endpoints are prefixed with `/api`.
 
-| Method | Endpoint                       | Description                                                     | Access      |
-| :----- | :----------------------------- | :-------------------------------------------------------------- | :---------- |
-| `POST` | `/auth/register`               | Register a new user.                                            | Public      |
-| `POST` | `/auth`                        | Login and receive a JWT.                                        | Public      |
-| `POST` | `/uploads`                     | Upload a new image.                                             | User        |
-| `GET`  | `/users`                       | Get a list of all users.                                        | Admin       |
-| `GET`  | `/users/:id`                   | Get a specific user by ID.                                      | User/Admin  |
-| `PATCH`| `/users/:id`                   | Update a user's details.                                        | User/Admin  |
-| `GET`  | `/images`                      | Get all images uploaded by the authenticated user.              | User        |
-| `GET`  | `/images/all`                  | Get a list of all images in the system.                         | Admin       |
-| `GET`  | `/images/:imageId`             | Get a specific image by its ID.                                 | User/Admin  |
-| `DELETE`| `/images/:imageId`             | Delete an image.                                                | User/Admin  |
-| `POST` | `/images/:imageId/transform`   | Transform an image and save it as a new file.                   | User/Admin  |
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/auth/register` | Register a new user. | Public |
+| `POST` | `/auth` | Login and receive a JWT. | Public |
+| `POST` | `/uploads` | Upload a new image. | User |
+| `GET` | `/users` | Get a list of all users. | Admin |
+| `GET` | `/users/:id` | Get a specific user by ID. | User/Admin |
+| `PATCH`| `/users/:id` | Update a user's details. | User/Admin |
+| `GET` | `/images` | Get all images uploaded by the authenticated user. | User |
+| `GET` | `/images/all` | Get a list of all images in the system. | Admin |
+| `GET` | `/images/:imageId` | Get a specific image by its ID. | User/Admin |
+| `DELETE`| `/images/:imageId` | Delete an image. | User/Admin |
+| `POST` | `/images/:imageId/transform` | Transform an image and save it as a new file. | User/Admin |
 
 ## Source
 
-This project is open source and can be found on GitHub.
+This project was inspired by the project idea on roadmap.sh and is open source.
 
-* **Repository**: [https://github.com/amirs0b/Roadmap.sh-Image-Processing-Service-API](https://www.google.com/search?q=https://github.com/amirs0b/Roadmap.sh-Image-Processing-Service-API)
+* **Project Idea**: [Image Processing Service on roadmap.sh](https://roadmap.sh/projects/image-processing-service)
+* **GitHub Repository**: [https://github.com/amirs0b/Roadmap.sh-Image-Processing-Service-API](https://www.google.com/search?q=https://github.com/amirs0b/Roadmap.sh-Image-Processing-Service-API)
