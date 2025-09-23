@@ -2,6 +2,7 @@ import ApiFeatures, {catchAsync, HandleERROR} from 'vanta-api';
 import Image from '../Models/ImageMd.js';
 import {applyTransformations} from "../Utils/ImageProcessing.js";
 import fs from "fs";
+import path from 'path'
 
 
 export const getAllImages = catchAsync(async (req, res, next) => {

@@ -7,7 +7,7 @@ const options = {
             title: 'Image Processing Service API',
             version: '1.0.0',
             description:
-                'A RESTful API for a backend image processing service with secure user authentication using JWT. It allows users to upload, manage, and transform images, including features like resizing, cropping, rotating, and applying filters.',
+                'A RESTful API for a backend image processing service with secure user authentication using JWT. It allows users to upload, manage, and transform images, including features like resizing, cropping, rotating, and applying filters. Transformed images are saved as new files and linked to the original.',
         },
         servers: [
             {
@@ -84,6 +84,11 @@ const options = {
                             description: 'The MIME type of the image file.',
                             example: 'image/jpeg',
                         },
+                        originalImageId: {
+                            type: 'string',
+                            description: 'The ID of the original image if this is a transformed version.',
+                            example: '60c72b2f9b1d8c001f8e4c6a'
+                        }
                     },
                 },
             },
@@ -435,7 +440,7 @@ const options = {
             },
             '/images/{imageId}/transform': {
                 post: {
-                    summary: 'Apply transformations to an image',
+                    summary: 'Apply transformations to an image and save it as a new file',
                     tags: ['Images'],
                     security: [{ bearerAuth: [] }],
                     parameters: [
@@ -522,13 +527,12 @@ const options = {
                         }
                     },
                     responses: {
-                        '200': {
-                            description: 'The transformed image.',
+                        '201': {
+                            description: 'Image transformed and saved successfully.',
                             content: {
-                                'image/*': {
+                                'application/json': {
                                     schema: {
-                                        type: 'string',
-                                        format: 'binary'
+                                        $ref: '#/components/schemas/Image'
                                     }
                                 }
                             }
