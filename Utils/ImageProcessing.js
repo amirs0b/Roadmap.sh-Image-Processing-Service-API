@@ -1,7 +1,8 @@
 import sharp from 'sharp';
 import { HandleERROR } from 'vanta-api';
+import fs from 'fs';
 
-export const applyTransformations = async (imagePath, transformations) => {
+export const applyTransformations = async (imagePath, transformations, outputPath) => {
     try {
         let image = sharp(imagePath);
 
@@ -26,9 +27,15 @@ export const applyTransformations = async (imagePath, transformations) => {
             image = image.toFormat(transformations.format);
         }
 
-        return image.toBuffer();
+        await image.toFile(outputPath);
+        const stats = fs.statSync(outputPath);
+        return {
+            path: outputPath,
+            size: stats.size,
+        };
 
     } catch (error) {
+        console.error(error);
         throw new HandleERROR("Error processing the image.", 500);
     }
 };

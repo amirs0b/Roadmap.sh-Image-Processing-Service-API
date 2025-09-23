@@ -7,6 +7,7 @@ const ImageMdSchema = new mongoose.Schema({
     size: {type: Number, required: true},
     userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
     mimeType: {type: String, required: true},
+    originalImageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Image', required: false }
 
 },{
     timestamps: true

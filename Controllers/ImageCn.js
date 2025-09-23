@@ -48,7 +48,7 @@ export const getOneImageById = catchAsync(async (req, res, next) => {
 })
 
 export const getTransformedImage = catchAsync(async (req, res, next) => {
-    const {imageId} = req.params;
+    const { imageId } = req.params;
     if (!imageId) {
         return next(new HandleERROR("Image ID is required", 400));
     }
@@ -58,22 +58,36 @@ export const getTransformedImage = catchAsync(async (req, res, next) => {
         return next(new HandleERROR("Image not found", 404));
     }
     if (image.userId.toString() !== req.userId && req.role !== 'admin') {
-        return next(new HandleERROR("You are not authorized to view this image", 403));
+        return next(new HandleERROR("You are not authorized to transform this image", 403));
     }
 
-    const transformations = req.query;
-    if (!transformations) {
+    const transformations = req.body;
+    if (Object.keys(transformations).length === 0) {
         return next(new HandleERROR("No transformations provided", 400));
     }
-    const transformedImageBuffer = await applyTransformations(image.path, transformations);
-    const mimeType = transformations.format ? `image/${transformations.format}` : image.mimeType;
-    res.set('Content-Type', mimeType);
-    // Corrected variable name below
-    res.send(transformedImageBuffer);
 
+    const originalPathInfo = path.parse(image.path);
+    const newFilename = `${originalPathInfo.name}-${Date.now()}${transformations.format ? '.' + transformations.format : originalPathInfo.ext}`;
+    const outputPath = path.join(path.dirname(image.path), newFilename);
 
-})
+    const transformedImageInfo = await applyTransformations(image.path, transformations, outputPath);
 
+    const newImage = await Image.create({
+        filename: newFilename,
+        originalName: image.originalName,
+        path: outputPath,
+        size: transformedImageInfo.size,
+        userId: req.userId,
+        mimeType: transformations.format ? `image/${transformations.format}` : image.mimeType,
+        originalImageId: imageId
+    });
+
+    res.status(201).json({
+        message: "Image transformed and saved successfully",
+        success: true,
+        data: newImage
+    });
+});
 
 export const removeImage = catchAsync(async (req, res, next) => {
     const {imageId} = req.params;
