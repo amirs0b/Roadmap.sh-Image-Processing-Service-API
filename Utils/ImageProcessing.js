@@ -6,10 +6,10 @@ export const applyTransformations = async (imagePath, transformations) => {
         let image = sharp(imagePath);
 
         if (transformations.resize) {
-            image.resize(transformations.resize.width, transformations.resize.height);
+            image = image.resize(transformations.resize.width, transformations.resize.height);
         }
         if (transformations.crop) {
-            image.extract({
+            image = image.extract({
                 left: transformations.crop.x,
                 top: transformations.crop.y,
                 width: transformations.crop.width,
@@ -17,13 +17,13 @@ export const applyTransformations = async (imagePath, transformations) => {
             });
         }
         if (transformations.rotate) {
-            image.rotate(transformations.rotate);
+            image = image.rotate(transformations.rotate);
         }
         if (transformations.filters?.grayscale) {
-            image.grayscale();
+            image = image.grayscale();
         }
         if (transformations.format) {
-            image.toFormat(transformations.format);
+            image = image.toFormat(transformations.format);
         }
 
         return image.toBuffer();

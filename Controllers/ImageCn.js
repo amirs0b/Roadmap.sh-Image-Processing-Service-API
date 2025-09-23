@@ -68,7 +68,9 @@ export const getTransformedImage = catchAsync(async (req, res, next) => {
     const transformedImageBuffer = await applyTransformations(image.path, transformations);
     const mimeType = transformations.format ? `image/${transformations.format}` : image.mimeType;
     res.set('Content-Type', mimeType);
-    res.send(transformedBuffer);
+    // Corrected variable name below
+    res.send(transformedImageBuffer);
+
 
 })
 
